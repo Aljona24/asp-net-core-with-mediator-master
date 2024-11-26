@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "575b2f1f-5da9-4080-bd27-15b215b75607",
+		"name": "My API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5479799"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "friends",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/friends/:id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Перевірка відповіді для GET by ID\", function () {\r",
+													"    // Отримуємо відповідь у вигляді JSON\r",
+													"    let responseBody = pm.response.json();\r",
+													"\r",
+													"    // Отримуємо id зі змінної середовища\r",
+													"    let firstId = pm.environment.get(\"firstId\");\r",
+													"\r",
+													"    // Перевіряємо статус-код\r",
+													"    pm.test(\"Статус-код має бути 200\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
+													"    });\r",
+													"    pm.test(\"Час відповіді менше 500мс\", function () {\r",
+													"        pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"    });\r",
+													"\r",
+													"    // Перевіряємо, що id у відповіді збігається зі збереженим\r",
+													"    pm.test(\"Перевірка id у відповіді\", function () {\r",
+													"        pm.expect(responseBody.id).to.eql(firstId);\r",
+													"    });\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/friends/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"friends",
+												":id"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{firstId}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/:id?Id=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														":id"
+													],
+													"query": [
+														{
+															"key": "Id",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"liked\": \"<boolean>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "like",
+							"item": [
+								{
+									"name": "/api/friends/like",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Статус-код має бути 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Час відповіді менше 500мс\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"cdb4681a-fcd3-47ed-9fd5-2eaf99ece8ce\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/friends/like",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"friends",
+												"like"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<uuid>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/friends/like",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"friends",
+														"like"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/friends",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Статус-код має бути 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Час відповіді менше 500мс\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"pm.test(\"Відповідь має бути JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Відповідь має бути json\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+											"});\r",
+											"pm.test(\"Відповідь є валідним GUID\", function () {\r",
+											"    let responseBody = pm.response.text(); // Отримуємо текст відповіді\r",
+											"    let guid = responseBody.replace(/^\"|\"$/g, \"\");\r",
+											"    let guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\r",
+											"    pm.expect(guid).to.match(guidRegex);\r",
+											"});\r",
+											"pm.test(\"Довжина відповіді має бути 38 символів\", function () {\r",
+											"    let responseBody = pm.response.text();\r",
+											"    pm.expect(responseBody.length).to.eql(38);\r",
+											"});\r",
+											"pm.test(\"Відповідь не є порожньою\", function () {\r",
+											"    let responseBody = pm.response.text();\r",
+											"    pm.expect(responseBody).to.not.be.empty;\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"let responseBody = pm.response.text().replace(/^\"|\"$/g, \"\");\r",
+											"pm.environment.set(\"userCreatedGuid\", responseBody); // Зберігаємо GUID у змінну середовища\r",
+											"console.log(\"GUID збережено:\", responseBody);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"nameFromPostman\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/friends",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/friends",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"friends"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "<uuid>"
+								}
+							]
+						},
+						{
+							"name": "/api/friends",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус-код має бути 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Час відповіді менше 500мс\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"pm.test(\"Відповідь має бути JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Відповідь є масивом\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    pm.expect(responseData).to.be.an(\"array\");\r",
+											"});\r",
+											"pm.test(\"Масив містить хоча б один елемент\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    pm.expect(responseData.length).to.be.above(0);\r",
+											"});\r",
+											"pm.test(\"Кожен елемент має ключі id, name, liked\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    responseData.forEach(function (item) {\r",
+											"        pm.expect(item).to.have.property(\"id\");\r",
+											"        pm.expect(item).to.have.property(\"name\");\r",
+											"        pm.expect(item).to.have.property(\"liked\");\r",
+											"    });\r",
+											"});\r",
+											"pm.test(\"Кожен id є валідним GUID\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    let guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\r",
+											"    responseData.forEach(function (item) {\r",
+											"        pm.expect(item.id).to.match(guidRegex);\r",
+											"    });\r",
+											"});\r",
+											"pm.test(\"Кожен liked є булевим значенням\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    responseData.forEach(function (item) {\r",
+											"        pm.expect(item.liked).to.be.a(\"boolean\");\r",
+											"    });\r",
+											"});\r",
+											"pm.test(\"nameFromPostman відповідає очікуваному id\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    let specificItem = responseData.find(item => item.id === \"0eef97aa-3156-4749-a937-e3a277c254bf\");\r",
+											"    pm.expect(specificItem).to.exist;\r",
+											"    pm.expect(specificItem.name).to.eql(\"nameFromPostman\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Перевірка, чи є збережений id у відповіді\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"\r",
+											"    // Отримуємо id із змінної середовища\r",
+											"    let savedId = pm.environment.get(\"userCreatedGuid\");\r",
+											"\r",
+											"    // Знаходимо об'єкт із відповідним id у відповіді\r",
+											"    let specificItem = responseData.find(item => item.id === savedId);\r",
+											"\r",
+											"    // Перевіряємо, що об'єкт існує\r",
+											"    pm.expect(specificItem).to.exist;\r",
+											"\r",
+											"    // Додаткова перевірка name для збереженого id\r",
+											"    if (specificItem) {\r",
+											"        pm.expect(specificItem.name).to.eql(\"nameFromPostman\");\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Зберігаємо перший id у змінну\", function () {\r",
+											"    let responseData = pm.response.json();\r",
+											"    let firstId = responseData[0].id;\r",
+											"    pm.environment.set(\"firstId\", firstId);\r",
+											"    console.log(\"Перший id:\", firstId);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/friends",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/friends",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"friends"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"liked\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"liked\": \"<boolean>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/friends",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус-код має бути 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Час відповіді менше 500мс\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"{{firstId}}\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/friends",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"friends"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/friends",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"friends"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
